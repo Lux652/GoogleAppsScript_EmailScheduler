@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+
+    <style>
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-RfekGV6fZXMN1XYz5oPc4N/0IDvTM1Nt6Xciam6v0Al+glvRJ2mhnsr2S6tH/qM8"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="form-group">
+        <form id="genericForm">
+            <label for="sel1">Unesite naziv kolone s E-mail adresama</label>
+
+
+            <div class="email">
+                <label for="email">Naziv kolone:</label>
+                <input type="text" name="email" id="email" size="4" class="form-control">
+            </div>
+
+
+            <br>
+            <br>
+            <div>
+                <label for="sel1">Odaberite broj kolona s datumima:</label>
+                <select id="sel2" class="form-control col-xs-2">
+                    <option value="-"></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+
+            <div class="date1 " style="display:none">
+                <label for="date1">Prvi datum:</label>
+                <input type="text" name="date1" id="date1" size="4" class="form-control">
+            </div>
+            <div class="date2 " style="display:none">
+                <label for="date2">Drugi datum:</label>
+                <input type="text" name="date2" id="date2" size="4" class="form-control">
+                <br>
+                <br>
+            </div>
+
+            <div class="day1 " style="display:none">
+                <label for="day1">Odgoda za prvi datum:</label>
+                <input type="text" name="day1" id="day1" size="4" class="form-control">
+            </div>
+            <div class="day2 " style="display:none">
+                <label for="day2">Odgoda za drugi datum:</label>
+                <input type="text" name="day2" id="day2" size="4" class="form-control">
+                <br>
+                <br>
+            </div>
+
+            <div class="subject1 " style="display:none">
+                <label for="subject1">Subject za prvi datum:</label>
+                <input type="text" name="subject1" class="form-control" id="subject1" size="28" placeholder="Subject">
+            </div>
+            <div class="subject2 " style="display:none">
+                <label for="subject2">Subject za drugi datum:</label>
+                <input type="text" name="subject2" class="form-control" id="subject2" size="28" placeholder="Subject">
+                <br>
+                <br>
+                <br>
+            </div>
+
+
+            <br>
+            <br>
+            <div class="">
+                <label for="sel3">Odaberite broj kolona za body:</label>
+                <select id="sel3" class="form-control">
+                    <option value="-"></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <div class="body1 " style="display:none">
+                <label for="body1">Body element 1:</label>
+                <input type="text" name="body1" id="body1" size="4" class="form-control">
+            </div>
+            <div class="body2 " style="display:none">
+                <label for="body2">Body element 2:</label>
+                <input type="text" name="body2" id="body2" size="4" class="form-control">
+            </div>
+            <div class="body3 " style="display:none">
+                <label for="body3">Body element 3:</label>
+                <input type="text" name="body3" id="body3" size="4" class="form-control">
+            </div>
+            <div class="body4 " style="display:none">
+                <label for="body4">Body element 4:</label>
+                <input type="text" name="body4" id="body4" size="4" class="form-control">
+            </div>
+            <div class="body5 " style="display:none">
+                <label for="body5">Body element 5:</label>
+                <input type="text" name="body5" id="body5" size="4" class="form-control">
+            </div>
+            <div class="body6 " style="display:none">
+                <label for="body6">Body element 6:</label>
+                <input type="text" name="body6" id="body6" size="4" class="form-control">
+            </div>
+            <div class="body7 " style="display:none">
+                <label for="body7">Body element 7:</label>
+                <input type="text" name="body7" id="body7" size="4" class="form-control">
+            </div>
+
+
+            <!-- <input type="submit" value="Spremi" onclick="google.script.run.withSuccessHandler(formSubmitted) .writeForm(this.parentNode); return false;"> -->
+            <br>
+            <br>
+            <br>
+            <button type="submit" id="set" class="btn btn-outline-info" onclick="google.script.run.withSuccessHandler(formSubmitted) .writeForm(this.parentNode);  return false;">Spremi</button>
+        </form>
+
+    </div>
+    <div id="message">
+        <h3 id="output"></h3>
+        <!-- <button class="btn btn-outline-warning" id="backb" style="display:none" onclick="goBack()">Back</button> -->
+    </div>
+    <script>
+        function formSubmitted(status) {
+            document.getElementById('genericForm').style.display = 'none'; //matches your form name or whatever you want to disappear post-submission
+            document.getElementById('output').innerHTML = status; //displays in item with the 'output' id
+            // document.getElementById('backb').style.display = "block";
+        };
+
+        function goBack() {
+            $('#genericForm').show();
+            $('#message').hide();
+        };
+
+        var email = $('#sel1');
+        var date = $('#sel2');
+        var body = $('#sel3');
+        var select = this.value;
+        email.change(function () {
+            if ($(this).val() == '1') {
+                $('.email1').show();
+                $('.email2').hide();
+                $('#email2').val("");
+                $('.email3').hide();
+                $('#email3').val("");
+            };
+            if ($(this).val() == '2') {
+                $('.email1').show();
+                $('.email2').show();
+                $('.email3').hide();
+                $('#email3').val("");
+            };
+            if ($(this).val() == '3') {
+                $('.email1').show();
+                $('.email2').show();
+                $('.email3').show();
+            };
+            if ($(this).val() == '-') {
+                $('.email1').hide();
+                $('#email1').val("");
+                $('.email2').hide();
+                $('#email2').val("");
+                $('.email3').hide();
+                $('#email3').val("");
+            };
+        });
+
+
+        date.change(function () {
+            if ($(this).val() == '1') {
+                $('.date1').show();
+                $('.date2').hide();
+                $('#date2').val("");
+                $('.day1').show();
+                $('.day2').hide();
+                $('#day2').val("");
+                $('.subject1').show();
+                $('.subject2').hide();
+                $('#subject2').val("");
+            }
+            if ($(this).val() == '2') {
+                $('.date1').show();
+                $('.date2').show();
+                $('.day1').show();
+                $('.day2').show();
+                $('.subject1').show();
+                $('.subject2').show();
+            }
+            if ($(this).val() == '-') {
+                $('.date1').hide();
+                $('#date1').val("");
+                $('.date2').hide();
+                $('#date2').val("");
+                $('.day1').hide();
+                $('#day1').val("");
+                $('.day2').hide();
+                $('#day2').val("");
+                $('.subject1').hide();
+                $('#subject1').val("");
+                $('.subject2').hide();
+                $('#subject2').val("");
+            }
+        });
+
+
+
+
+        body.change(function () {
+            if ($(this).val() == '1') {
+                $('.body1').show();
+                $('.body2').hide();
+                $('#body2').val("");
+                $('.body3').hide();
+                $('#body3').val("");
+                $('.body4').hide();
+                $('#body4').val("");
+                $('.body5').hide();
+                $('#body5').val("");
+                $('.body6').hide();
+                $('#body6').val("");
+                $('.body7').hide();
+                $('#body7').val("");
+            }
+            if ($(this).val() == '2') {
+                $('.body1').show();
+                $('.body2').show();
+                $('.body3').hide();
+                $('#body3').val("");
+                $('.body4').hide();
+                $('#body4').val("");
+                $('.body5').hide();
+                $('#body5').val("");
+                $('.body6').hide();
+                $('#body6').val("");
+                $('.body7').hide();
+                $('#body7').val("");
+            }
+            if ($(this).val() == '3') {
+                $('.body1').show();
+                $('.body2').show();
+                $('.body3').show();
+                $('.body4').hide();
+                $('#body4').val("");
+                $('.body5').hide();
+                $('#body5').val("");
+                $('.body6').hide();
+                $('#body6').val("");
+                $('.body7').hide();
+                $('#body7').val("");
+            }
+            if ($(this).val() == '4') {
+                $('.body1').show();
+                $('.body2').show();
+                $('.body3').show();
+                $('.body4').show();
+                $('.body5').hide();
+                $('#body5').val("");
+                $('.body6').hide();
+                $('#body6').val("");
+                $('.body7').hide();
+                $('#body7').val("");
+            }
+            if ($(this).val() == '5') {
+                $('.body1').show();
+                $('.body2').show();
+                $('.body3').show();
+                $('.body4').show();
+                $('.body5').show();
+                $('.body6').hide();
+                $('#body6').val("");
+                $('.body7').hide();
+                $('#body7').val("");
+            }
+
+            if ($(this).val() == '6') {
+                $('.body1').show();
+                $('.body2').show();
+                $('.body3').show();
+                $('.body4').show();
+                $('.body5').show();
+                $('.body6').show();
+                $('.body7').hide();
+                $('#body7').val("");
+            }
+            if ($(this).val() == '7') {
+                $('.body1').show();
+                $('.body2').show();
+                $('.body3').show();
+                $('.body4').show();
+                $('.body5').show();
+                $('.body6').show();
+                $('.body7').show();
+            }
+            if ($(this).val() == '-') {
+                $('.body1').hide();
+                $('#body1').val("");
+                $('.body2').hide();
+                $('#body2').val("");
+                $('.body3').hide();
+                $('#body3').val("");
+                $('.body4').hide();
+                $('#body4').val("");
+                $('.body5').hide();
+                $('#body5').val("");
+                $('.body6').hide();
+                $('#body6').val("");
+                $('.body7').hide();
+                $('#body7').val("");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
